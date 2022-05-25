@@ -5,3 +5,5 @@ function getRandomInt(min: number, max: number) {
 }
 
 export default getRandomInt;
+
+console.log(getRandomInt(1, 3));
