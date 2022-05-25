@@ -9,11 +9,16 @@ export default class PVP extends Battle {
   ) { super(_player1); }
 
   fight(): number {
-    const turnOrder = getRandomInt(1, 2);
+    const randomInit = getRandomInt(1, 2);
 
     while (this._player1.lifePoints > 0 && this._player2.lifePoints > 0) {
-      this._player1.attack(this._player2);
-      this._player2.attack(this._player1);
+      if (randomInit === 1) {
+        this._player1.attack(this._player2);
+        this._player2.attack(this._player1);
+      } else {
+        this._player2.attack(this._player1);
+        this._player1.attack(this._player2);
+      }
     }
     return super.fight();
   }
