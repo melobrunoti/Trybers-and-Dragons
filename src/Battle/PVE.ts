@@ -4,7 +4,7 @@ import Fighter, { SimpleFighter } from '../Fighter';
 export default class PVE extends Battle {
   constructor(
     private _player: Fighter,
-    private _monster: SimpleFighter[] | Fighter[],
+    private _enemie: SimpleFighter[] | Fighter[],
   ) { 
     super(_player);
   }
@@ -26,11 +26,11 @@ export default class PVE extends Battle {
 
   fight(): number {
     while (this._player.lifePoints > 0
-       && this._monster.some((m) => m.lifePoints > 0)) {
-      const monsters = PVE.aliveEnemies(this._monster);
-      if (monsters) {
-        this.player.attack(monsters[0]);
-        PVE.enemiesAttack(this._monster, this._player); 
+       && this._enemie.some((m) => m.lifePoints > 0)) {
+      const enemies = PVE.aliveEnemies(this._enemie);
+      if (enemies) {
+        this.player.attack(enemies[0]);
+        PVE.enemiesAttack(this._enemie, this._player); 
       } 
     }
     return super.fight();
