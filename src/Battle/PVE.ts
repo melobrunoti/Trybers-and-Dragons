@@ -9,16 +9,16 @@ export default class PVE extends Battle {
     super(_player);
   }
 
-  static aliveEnemies(monsters: SimpleFighter[] | Fighter[]):
+  aliveEnemies(enemies: SimpleFighter[] | Fighter[]):
   SimpleFighter[] | Fighter[] | undefined {
-    return monsters.filter((monster) => monster.lifePoints > 0);
+    return enemies.filter((enemie) => enemie.lifePoints > 0);
   }
 
-  static enemiesAttack(
-    monsters: SimpleFighter[] | Fighter[],
+  enemiesAttack(
+    enemies: SimpleFighter[] | Fighter[],
     player: Fighter,
   ): void {
-    const aliveEnemies = PVE.aliveEnemies(monsters);
+    const aliveEnemies = this.aliveEnemies(enemies);
     if (aliveEnemies) {
       aliveEnemies.forEach((enemie) => enemie.attack(player));
     }
@@ -27,10 +27,10 @@ export default class PVE extends Battle {
   fight(): number {
     while (this._player.lifePoints > 0
        && this._enemie.some((m) => m.lifePoints > 0)) {
-      const enemies = PVE.aliveEnemies(this._enemie);
+      const enemies = this.aliveEnemies(this._enemie);
       if (enemies) {
         this.player.attack(enemies[0]);
-        PVE.enemiesAttack(this._enemie, this._player); 
+        this.enemiesAttack(this._enemie, this._player); 
       } 
     }
     return super.fight();
